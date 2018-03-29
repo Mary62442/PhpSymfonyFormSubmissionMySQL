@@ -1,0 +1,18 @@
+index:
+    path: /
+    controller: App\Controller\DefaultController::index
+about:
+    path: /about
+    controller: App\Controller\DefaultController::about
+apipost:
+    path: /apipost
+    controller: App\Controller\DefaultController::apipost 
+app_lucky_number:
+    path: /lucky/number
+    controller: App\Controller\LuckyController::number
+officesuppliesform:
+    path: /officesuppliesform
+    controller: App\Controller\DefaultController::officeSuppliesForm
+submitform:
+    path: /submitform
+    controller: App\Controller\DefaultController::submitForm
