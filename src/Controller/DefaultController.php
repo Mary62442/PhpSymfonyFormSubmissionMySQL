@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 use App\Model\Item;
+use App\Dal\Connector;
+use App\Dal\Repo;
 
 
 use Symfony\Component\HttpFoundation\Response;
@@ -35,51 +37,26 @@ class DefaultController
     }
 
     public function officeSuppliesForm()
-    {
-
-        $servername = "localhost";
-        $username = "root";
-        $password = "dm88";
-        $dbname = "mydb";
-                        
-        $conn = mysqli_connect($servername, $username, $password, $dbname);                
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        } 
-
-        $sql = "SELECT * FROM items";
-        $result = $conn->query($sql);
-
-        $stringItems = "";
-
-        while($row = $result->fetch_assoc()) {
-            $stringItems .= "<p>".$row["itemName"]." Price: £".$row["itemPrice"]
-            ."</p><br>Quantity: <input type ='number' min='0' max='100' name = '".$row["itemInputId"]."'>";                                      
-        }
-
+    { 
+        $cn = new Connector();
+        $conn= $cn->Connect();
+        $repo = new Repo();        
+        $stringItems = $repo->GetItems($conn);
         $conn->close();            
 
         return new Response("
-
             <form action = '/submitform' method='POST'>  
             {$stringItems}
             <input type='submit'>
-            </form>"
-          
+            </form>"          
         ); 
     }
 
     public function submitForm()
-    {     
-        $servername = "localhost";
-        $username = "root";
-        $password = "dm88";
-        $dbname = "mydb";
-                        
-        $conn = mysqli_connect($servername, $username, $password, $dbname);                
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        } 
+    { 
+
+        $cn = new Connector();
+        $conn= $cn->Connect();
 
         $sqlName = "SELECT itemName FROM items";
         $resultName = $conn->query($sqlName);          

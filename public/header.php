@@ -2,6 +2,14 @@
 integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 crossorigin="anonymous"></script>
 
+<style>
+.test{
+
+    color:red;
+}
+
+</style>
+
 <body>
 <script>
 $( document ).ready(function() {
